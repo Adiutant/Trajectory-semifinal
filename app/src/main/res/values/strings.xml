@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TrajectorySemiFinal</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="url">url</string>
+    <string name="service_name">service name</string>
+    <string name="description">description</string>
+    <string name="icon">Icon</string>
+
+</resources>
