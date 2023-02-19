@@ -1,4 +1,4 @@
-package com.study.trajectory_semifinal
+package com.study.trajectory_semifinal.observers
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver

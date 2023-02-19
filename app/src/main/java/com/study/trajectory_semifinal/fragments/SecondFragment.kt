@@ -6,7 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.addCallback
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.study.trajectory_semifinal.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -36,6 +40,22 @@ class SecondFragment : Fragment() {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(serviceImageHolder)
         serviceUrl.text = bundle.getString("service_url")
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(requireActivity()) {
+            val nav = Navigation.findNavController(
+                requireActivity(),
+                R.id.nav_host_fragment_content_main
+            )
+            nav.safeNavigate(R.id.SecondFragment,R.id.action_SecondFragment_to_FirstFragment)
+        }
+    }
+    private fun NavController.safeNavigate(
+        @IdRes currentDestinationId: Int,
+        @IdRes id: Int,
+        args: Bundle? = null
+    ) {
+        if (currentDestinationId == currentDestination?.id) {
+            navigate(id, args)
+        }
     }
 
     override fun onDestroyView() {

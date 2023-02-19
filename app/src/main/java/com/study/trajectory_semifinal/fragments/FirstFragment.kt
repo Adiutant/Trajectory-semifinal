@@ -17,18 +17,13 @@ import com.study.trajectory_semifinal.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.Network
 import android.view.View
+import androidx.annotation.IdRes
 import com.study.trajectory_semifinal.adapter.RecyclerItemClickListener
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.study.trajectory_semifinal.NetworkStateReceiver
+import com.study.trajectory_semifinal.observers.NetworkStateReceiver
 import com.study.trajectory_semifinal.databinding.FragmentFirstBinding
 import com.study.trajectory_semifinal.model.Data
 import retrofit2.Call
@@ -120,7 +115,7 @@ class FirstFragment : Fragment(), Callback<Data?> , Subscriber {
                                 "service_url",
                                 response.body()!!.items[position].service_url
                             )
-                            nav.navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+                            nav.safeNavigate(R.id.FirstFragment,R.id.action_FirstFragment_to_SecondFragment, bundle)
                         }
 
                         override fun onItemLongClick(view: View?, position: Int) {}
@@ -148,7 +143,15 @@ class FirstFragment : Fragment(), Callback<Data?> , Subscriber {
         private const val CHANNEL_ID = "NOTIFICATION"
     }
 
-
+    fun NavController.safeNavigate(
+        @IdRes currentDestinationId: Int,
+        @IdRes id: Int,
+        args: Bundle? = null
+    ) {
+        if (currentDestinationId == currentDestination?.id) {
+            navigate(id, args)
+        }
+    }
     override fun notifyStateChanged(state:Boolean) {
         if (state){
             start();
