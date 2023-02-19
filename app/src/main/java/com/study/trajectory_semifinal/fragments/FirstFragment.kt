@@ -127,7 +127,7 @@ class FirstFragment : Fragment(), Callback<Data?> , Subscriber {
         val mAlertDialogBuilder = AlertDialog.Builder(requireActivity())
         mAlertDialogBuilder.setTitle("Ошибка")
         mAlertDialogBuilder.setIcon(R.mipmap.ic_launcher)
-        mAlertDialogBuilder.setMessage("Ошибка запроса к API, проведите вверх, чтобы обновить")
+        mAlertDialogBuilder.setMessage("Ошибка запроса к API, проведите вверх, чтобы обновить или дождитесь подключения")
         mAlertDialogBuilder.setCancelable(false);
         mAlertDialogBuilder.setPositiveButton("Ok"){_,_->
         }
